@@ -136,6 +136,7 @@ for subfolder in subfolders:
             audio_file_eyed3.tag.images.set(ImageFrame.FRONT_COVER, open(subfolder + "/" + mp3_image, 'rb').read(), 'image/jpeg')
 
             audio_file_eyed3.tag.save()
+            os.remove(subfolder + "/" + "temp.wav")
 
 # Checks result.
 # if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
