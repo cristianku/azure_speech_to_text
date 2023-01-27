@@ -108,7 +108,7 @@ for subfolder in subfolders:
 
             # speech_recognizer.session_started.connect(lambda evt: print('SESSION STARTED: {}'.format(evt)))
             # speech_recognizer.session_stopped.connect(lambda evt: print('SESSION STOPPED {}'.format(evt)))
-            # speech_recognizer.canceled.connect(lambda evt: print('CANCELED {}'.format(evt)))
+            speech_recognizer.canceled.connect(lambda evt: print('CANCELED {}'.format(evt)))
             # stop continuous recognition on either session stopped or canceled events
             speech_recognizer.session_stopped.connect(stop_cb)
             speech_recognizer.canceled.connect(stop_cb)
