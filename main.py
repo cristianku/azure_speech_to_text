@@ -44,12 +44,12 @@ subfolders = [ f.path for f in os.scandir(".") if f.is_dir() and  f.name.startsw
 
 for subfolder in subfolders:
     # print(subfolder)
-    onlyfiles = [f for f in listdir(subfolder) if isfile(join(subfolder, f)) ]
+    onlyfiles = [f for f in sorted(listdir(subfolder)) if isfile(join(subfolder, f)) ]
     # print(onlyfiles)
     config_file = configparser.ConfigParser()
     # print(mp3_tags.sections())
     config_file.read(subfolder + "/" + "config.ini")
-    print(subfolder + "/" + "config.ini")
+    # print(subfolder + "/" + "config.ini")
     # print(config_file.sections())
 
     mp3_tags_artist = config_file['MP3_TAGS']['Artist']
@@ -61,8 +61,8 @@ for subfolder in subfolders:
 
     for filename in onlyfiles:
         if Path(filename).suffix == ".mp3":
-            print ( " ")
-            print ( " Processing new file .... ")
+            # print ( " ")
+            # print ( " Processing new file .... ")
 
             filename_with_path = subfolder + "/" + filename
             print(filename_with_path)
@@ -99,16 +99,16 @@ for subfolder in subfolders:
             def compose_text_result(txt):
                 global text_result
                 text_result += txt
-                print(txt)
+                # print(txt)
 
             # Connect callbacks to the events fired by the speech recognizer
             # speech_recognizer.recognizing.connect(lambda evt: print('RECOGNIZING: {}'.format(evt)))
             # speech_recognizer.recognized.connect(lambda evt: print(evt.result.text): text_result =  text_result + evt.result.text)
             speech_recognizer.recognized.connect(lambda evt: compose_text_result(  evt.result.text))
 
-            speech_recognizer.session_started.connect(lambda evt: print('SESSION STARTED: {}'.format(evt)))
-            speech_recognizer.session_stopped.connect(lambda evt: print('SESSION STOPPED {}'.format(evt)))
-            speech_recognizer.canceled.connect(lambda evt: print('CANCELED {}'.format(evt)))
+            # speech_recognizer.session_started.connect(lambda evt: print('SESSION STARTED: {}'.format(evt)))
+            # speech_recognizer.session_stopped.connect(lambda evt: print('SESSION STOPPED {}'.format(evt)))
+            # speech_recognizer.canceled.connect(lambda evt: print('CANCELED {}'.format(evt)))
             # stop continuous recognition on either session stopped or canceled events
             speech_recognizer.session_stopped.connect(stop_cb)
             speech_recognizer.canceled.connect(stop_cb)
